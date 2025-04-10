@@ -13,15 +13,14 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home); // Ensure this layout is correct
+        setContentView(R.layout.activity_home);
 
-        // Find the logout button by its ID
         Button logoutButton = findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut(); // Sign out the user
+            FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // Close the current activity
+            finish();
         });
     }
 }

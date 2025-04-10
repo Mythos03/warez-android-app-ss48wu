@@ -13,17 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -56,18 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Log.d("RegisterActivity", "FirebaseAuth regisztráció sikeres");
 
-                        // Animációs üzenet megjelenítése
                         TextView successMessage = new TextView(this);
                         successMessage.setText("Registration successful!");
                         successMessage.setTextSize(18);
                         successMessage.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
                         successMessage.setGravity(Gravity.CENTER);
 
-                        // Animáció betöltése
                         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
                         successMessage.startAnimation(fadeIn);
 
-                        // Megjelenítés
                         setContentView(successMessage);
 
                         new Handler(Looper.getMainLooper()).postDelayed(() -> {
