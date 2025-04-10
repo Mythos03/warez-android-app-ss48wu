@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "261296653692",
+    "project_id": "tomcrack-app",
+    "storage_bucket": "tomcrack-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261296653692:android:19abadc311ae95979f50f9",
+        "android_client_info": {
+          "package_name": "com.example.tomcrack"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXgk_MZMTxzSk6Sypyttee9ZaXTti-gQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
