@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Vertical Guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/verticalGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <!-- Horizontal Guidelines -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <!-- Barriers -->
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrierTop"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="fileNameEditText,fileDescriptionEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- File Name Input -->
+    <EditText
+        android:id="@+id/fileNameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/file_name"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd" />
+
+    <!-- File Description Input -->
+    <EditText
+        android:id="@+id/fileDescriptionEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/file_description"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/fileNameEditText"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        android:layout_marginTop="16dp" />
+
+    <!-- Category Spinner -->
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fileDescriptionEditText"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        android:layout_marginTop="16dp" />
+
+    <!-- Pick File Button -->
+    <Button
+        android:id="@+id/pickFileButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_file"
+        app:layout_constraintTop_toBottomOf="@id/categorySpinner"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        android:layout_marginTop="16dp" />
+
+    <!-- Upload Button -->
+    <Button
+        android:id="@+id/uploadButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/upload"
+        app:layout_constraintTop_toBottomOf="@id/pickFileButton"
+        app:layout_constraintStart_toStartOf="@id/verticalGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@id/verticalGuidelineEnd"
+        android:layout_marginTop="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,4 +3,15 @@
     <string name="hello_world">Hello, World!</string>
     <string name="email">Email</string>
     <string name="logout">Logout</string>
+    <string name="upload">Upload</string>
+    <string name="pick_file">Pick File</string>
+    <string name="file_description">File Description</string>
+    <string name="file_name">File Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="file_upload">File Upload</string>
+    <string name="comment_list">Comment List</string>
+    <string name="file_list">File List</string>
+    <string name="save_file">save_file</string>
 </resources>

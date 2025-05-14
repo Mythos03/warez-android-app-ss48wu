@@ -6,41 +6,42 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/fileListButton"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/fileNameEditText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="File List"
+        android:hint="@string/file_name"
+        android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/fileUploadButton"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/fileDescriptionEditText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="File Upload"
-        app:layout_constraintTop_toBottomOf="@id/fileListButton"
+        android:hint="@string/file_description"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/fileNameEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Spinner
+        android:id="@+id/categorySpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/fileDescriptionEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
     <Button
-        android:id="@+id/commentListButton"
-        android:layout_width="match_parent"
+        android:id="@+id/saveFileButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Comment List"
-        app:layout_constraintTop_toBottomOf="@id/fileUploadButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
-
-    <Button
-        android:id="@+id/fileCreationButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Create File"
-        app:layout_constraintTop_toBottomOf="@id/commentListButton"
+        android:text="@string/save_file"
+        app:layout_constraintTop_toBottomOf="@id/categorySpinner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
