@@ -1,8 +1,10 @@
 package com.example.tomcrack.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.text.TextUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -10,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -41,7 +44,6 @@ public class FileUploadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Apply fade_in animation on activity entry
         overridePendingTransition(R.anim.fade_in, R.anim.fade_in);
 
         setContentView(R.layout.activity_file_upload);
@@ -81,8 +83,33 @@ public class FileUploadActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK && data != null) {
             selectedFileUri = data.getData();
-            Toast.makeText(this, "File selected: " + selectedFileUri.getLastPathSegment(), Toast.LENGTH_SHORT).show();
+            if (selectedFileUri != null) {
+                String fileName = getFileName(selectedFileUri);
+                fileNameEditText.setText(fileName);
+                TextView selectedFileNameTextView = findViewById(R.id.selectedFileNameTextView);
+                selectedFileNameTextView.setText("Selected File: " + fileName);
+
+                Toast.makeText(this, "File selected: " + fileName, Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    if (nameIndex != -1) {
+                        result = cursor.getString(nameIndex);
+                    }
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getLastPathSegment();
+        }
+        return result;
     }
 
     private void uploadFile() {
@@ -90,15 +117,16 @@ public class FileUploadActivity extends AppCompatActivity {
         String fileDescription = fileDescriptionEditText.getText().toString();
         Category selectedCategory = (Category) categorySpinner.getSelectedItem();
 
-        if (TextUtils.isEmpty(fileName) || TextUtils.isEmpty(fileDescription) || selectedFileUri == null || selectedCategory == null) {
-            Snackbar.make(rootLayout, "Please fill all fields and select a file", Snackbar.LENGTH_SHORT).show();
+        File file = new File(fileName, 0, selectedFileUri.toString(), selectedCategory, new Date(), fileDescription, null);
+        if (TextUtils.isEmpty(fileName) || TextUtils.isEmpty(fileDescription) || selectedFileUri == null) {
+            Snackbar.make(rootLayout, "Please fill all required fields and select a file", Snackbar.LENGTH_SHORT).show();
             return;
         }
-
-        File file = new File(fileName, 0, selectedFileUri.toString(), selectedCategory, new Date(), fileDescription, null);
-
         fileRepository.createFile(file, aVoid -> {
             Snackbar.make(rootLayout, "File uploaded successfully", Snackbar.LENGTH_SHORT).show();
+            Intent intent = new Intent(FileUploadActivity.this, FileListActivity.class);
+            startActivity(intent);
+            finish();
         }, e -> {
             Snackbar.make(rootLayout, "Failed to upload file: " + e.getMessage(), Snackbar.LENGTH_SHORT).show();
         });
@@ -106,8 +134,6 @@ public class FileUploadActivity extends AppCompatActivity {
 
     private void showSnackbar(String message) {
         Snackbar snackbar = Snackbar.make(rootLayout, message, Snackbar.LENGTH_SHORT);
-
-        // Apply slide_up animation to the Snackbar
         snackbar.addCallback(new Snackbar.Callback() {
             @Override
             public void onShown(Snackbar sb) {

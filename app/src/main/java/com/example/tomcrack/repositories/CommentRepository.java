@@ -18,14 +18,12 @@ public class CommentRepository {
         commentCollection = db.collection("comments");
     }
 
-    // Add a new comment
     public void addComment(Comment comment, Consumer<Void> onSuccess, Consumer<Exception> onError) {
         commentCollection.add(comment)
                 .addOnSuccessListener(documentReference -> onSuccess.accept(null))
                 .addOnFailureListener(onError::accept);
     }
 
-    // Get all comments for a specific file
     public void getCommentsForFile(String fileId, Consumer<List<Comment>> onSuccess, Consumer<Exception> onError) {
         commentCollection.whereEqualTo("file.id", fileId)
                 .orderBy("createdAt", Query.Direction.ASCENDING)

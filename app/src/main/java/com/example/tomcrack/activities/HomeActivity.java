@@ -26,8 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Button fileListButton = findViewById(R.id.fileListButton);
-        Button fileUploadButton = findViewById(R.id.fileUploadButton);
-        Button commentListButton = findViewById(R.id.commentListButton);
+        Button fileUploadButton = findViewById(R.id.uploadButton);
 
         fileListButton.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, FileListActivity.class);
@@ -39,14 +38,15 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        commentListButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, CommentListActivity.class);
+        Button viewAllFilesButton = findViewById(R.id.viewAllFilesButton);
+        viewAllFilesButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, FileListActivity.class);
             startActivity(intent);
         });
 
-        Button fileCreationButton = findViewById(R.id.fileCreationButton);
-        fileCreationButton.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, FileCreationActivity.class);
+        Button createCategoryButton = findViewById(R.id.createCategoryButton);
+        createCategoryButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, CreateCategoryActivity.class);
             startActivity(intent);
         });
 
@@ -58,7 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CleanupReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-        // Set the alarm to trigger at midnight
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -79,12 +78,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            // Redirect to MainActivity if no user is logged in
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         } else {
-            // Show a welcome message
             Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -94,12 +91,10 @@ public class HomeActivity extends AppCompatActivity {
         FileRepository fileRepository = new FileRepository();
 
         fileRepository.getTopFilesUploadedByUser(userId, files -> {
-            // Handle the list of top files (e.g., display in a RecyclerView or log them)
             for (File file : files) {
                 System.out.println("Top File: " + file.getName());
             }
         }, error -> {
-            // Handle error
             Toast.makeText(this, "Failed to load top files: " + error.getMessage(), Toast.LENGTH_SHORT).show();
         });
     }

@@ -9,9 +9,7 @@ public class Comment {
     private File file;
     private Date createdAt;
 
-    public Comment() {
-        // Required for Firestore deserialization
-    }
+    public Comment() {}
 
     public Comment(String id, String content, User author, File file, Date createdAt) {
         this.id = id;
@@ -21,7 +19,6 @@ public class Comment {
         this.createdAt = createdAt;
     }
 
-    // --- Getters ---
     public String getId() {
         return id;
     }
@@ -42,7 +39,6 @@ public class Comment {
         return createdAt;
     }
 
-    // --- Setters ---
     public void setId(String id) {
         this.id = id;
     }

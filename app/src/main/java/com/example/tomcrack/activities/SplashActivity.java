@@ -20,11 +20,9 @@ public class SplashActivity extends AppCompatActivity {
 
         ImageView logoImageView = findViewById(R.id.logoImageView);
 
-        // Load fade-in animation
         Animation fadeIn = AnimationUtils.loadAnimation(this, R.anim.fade_in);
         logoImageView.startAnimation(fadeIn);
 
-        // Delay for 2 seconds and navigate to MainActivity
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);

@@ -19,7 +19,12 @@ public class CategoryRepository {
         cachedCategories = new ArrayList<>();
     }
 
-    // Fetch all categories from Firestore and cache them
+    public void createCategory(Category category, Consumer<Void> onSuccess, Consumer<Exception> onError) {
+        categoryCollection.add(category)
+                .addOnSuccessListener(documentReference -> onSuccess.accept(null))
+                .addOnFailureListener(onError::accept);
+    }
+
     public void fetchCategories(Consumer<List<Category>> onSuccess, Consumer<Exception> onError) {
         categoryCollection.get()
                 .addOnSuccessListener(querySnapshot -> {
@@ -28,12 +33,11 @@ public class CategoryRepository {
                         Category category = document.toObject(Category.class);
                         cachedCategories.add(category);
                     }
-                    onSuccess.accept(cachedCategories);
+                    onSuccess.accept(new ArrayList<>(cachedCategories));
                 })
                 .addOnFailureListener(onError::accept);
     }
 
-    // Get locally cached categories
     public List<Category> getCachedCategories() {
         return new ArrayList<>(cachedCategories);
     }

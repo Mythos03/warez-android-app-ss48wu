@@ -14,4 +14,7 @@
     <string name="comment_list">Comment List</string>
     <string name="file_list">File List</string>
     <string name="save_file">save_file</string>
+    <string name="select_file">Select File</string>
+    <string name="view_files">View Files</string>
+    <string name="upload_file">Upload File</string>
 </resources>

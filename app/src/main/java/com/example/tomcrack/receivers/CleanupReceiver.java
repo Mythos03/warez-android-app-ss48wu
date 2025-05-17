@@ -15,12 +15,10 @@ public class CleanupReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
-        // Calculate the date 30 days ago
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, -30);
         Date cutoffDate = calendar.getTime();
 
-        // Query Firestore for files older than 30 days and delete them
         firestore.collection("files")
                 .whereLessThan("uploadDate", cutoffDate)
                 .get()
@@ -29,8 +27,6 @@ public class CleanupReceiver extends BroadcastReceiver {
                         firestore.collection("files").document(document.getId()).delete();
                     });
                 })
-                .addOnFailureListener(e -> {
-                    // Log or handle the error
-                });
+                .addOnFailureListener(e -> {});
     }
 }

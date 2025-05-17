@@ -3,23 +3,20 @@ package com.example.tomcrack.models;
 import com.google.firebase.firestore.ServerTimestamp;
 
 import java.util.Date;
-import java.util.Map;
 
 public class File {
     private String id;
     private String name;
     private long size;
     private String path;
-    private Category category; // can be null
+    private Category category;
     private Date uploadDate;
     @ServerTimestamp
     private Date createdAt;
     private String description;
-    private User uploader; // can be null
+    private User uploader;
 
-    public File() {
-        // Required empty constructor for Firestore deserialization
-    }
+    public File() {}
 
     public File(String name, long size, String path, Category category, Date uploadDate,
                 String description, User uploader) {
@@ -32,7 +29,6 @@ public class File {
         this.uploader = uploader;
     }
 
-    // Getters and setters for all fields
     public String getId() {
         return id;
     }

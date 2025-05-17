@@ -8,18 +8,17 @@
 
     <Button
         android:id="@+id/fileListButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="File List"
+        android:text="@string/view_files"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/fileUploadButton"
-        android:layout_width="match_parent"
+        android:id="@+id/uploadButton"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="File Upload"
+        android:text="Upload File"
         app:layout_constraintTop_toBottomOf="@id/fileListButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,17 +29,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Comment List"
-        app:layout_constraintTop_toBottomOf="@id/fileUploadButton"
+        app:layout_constraintTop_toBottomOf="@id/uploadButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
 
     <Button
-        android:id="@+id/fileCreationButton"
-        android:layout_width="match_parent"
+        android:id="@+id/viewAllFilesButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create File"
+        android:text="View All Files"
         app:layout_constraintTop_toBottomOf="@id/commentListButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/createCategoryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Category"
+        app:layout_constraintTop_toBottomOf="@id/viewAllFilesButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp" />
